@@ -1,5 +1,5 @@
 import "./style.css";
-import { Node } from "./linked-list.ts";
+import LinkedList from "./linked-list";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
@@ -7,5 +7,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-const myNode = new Node({ name: "john", age: 23 });
-console.log(myNode);
+const numberList = new LinkedList<number>(1);
+const stringList = new LinkedList<string>("Hello");
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+const personList = new LinkedList<Person>({ name: "John", age: 23 });
