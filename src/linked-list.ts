@@ -44,4 +44,11 @@ export default class LinkedList<Type> {
         // 6. Returning the entire list
         return this;
     }
+
+    pop() {
+        // Edge Case - 1: Empty List
+        if (!this.head) {
+            return undefined;
+        }
+    }
 }
