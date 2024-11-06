@@ -1,21 +1,21 @@
-class Node<Type> {
-    value: Type;
-    next: Node<Type> | null;
+class Node<T> {
+    value: T;
+    next: Node<T> | null;
 
-    constructor(value: Type) {
+    constructor(value: T) {
         this.value = value;
         this.next = null;
     }
 }
 
-export default class LinkedList<Type> {
-    head: Node<Type> | null;
-    // head: Node<Type>;
-    tail: Node<Type> | null;
-    // tail: Node<Type>;
+export default class LinkedList<T> {
+    head: Node<T> | null;
+    // head: Node<T>;
+    tail: Node<T> | null;
+    // tail: Node<T>;
     length: number;
 
-    constructor(value: Type) {
+    constructor(value: T) {
         const newNode = new Node(value);
 
         this.head = newNode;
@@ -23,7 +23,7 @@ export default class LinkedList<Type> {
         this.length = 1;
     }
 
-    push(value: Type): LinkedList<Type> {
+    push(value: T): LinkedList<T> {
         // 1. Creating a new node with a given value
         const newNode = new Node(value);
 
@@ -47,7 +47,7 @@ export default class LinkedList<Type> {
         return this;
     }
 
-    pop(): Node<Type> | undefined {
+    pop(): Node<T> | undefined {
         // Edge Case - 1: Empty List
         if (!this.head || !this.tail) {
             // If the list is empty (no head), return undefined since there's nothing to remove
@@ -85,5 +85,28 @@ export default class LinkedList<Type> {
 
         // Returning removed (last) node
         return temp;
+    }
+
+    unshift(value: T): LinkedList<T> {
+        // Creating a new node with the given value
+        const newNode = new Node(value);
+
+        // Edge Case: Check if list is empty
+        if (!this.head) {
+            // If empty, set both head and tail to new node
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            // If list not empty:
+            // Set new node's next pointer
+            newNode.next = this.head;
+            // Point head to the new node
+            this.head = newNode;
+        }
+
+        // Increment length
+        this.length++;
+        // Return the list
+        return this;
     }
 }
