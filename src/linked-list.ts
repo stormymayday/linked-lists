@@ -9,8 +9,10 @@ class Node<Type> {
 }
 
 export default class LinkedList<Type> {
-    head: Node<Type>;
-    tail: Node<Type>;
+    head: Node<Type> | null;
+    // head: Node<Type>;
+    tail: Node<Type> | null;
+    // tail: Node<Type>;
     length: number;
 
     constructor(value: Type) {
@@ -26,7 +28,7 @@ export default class LinkedList<Type> {
         const newNode = new Node(value);
 
         // 2. (Edge Case) Checking if the list is empty
-        if (!this.head) {
+        if (!this.head || !this.tail) {
             // 2a. If empty, setting head and tail to the new node
             this.head = newNode;
             this.tail = newNode;
@@ -45,10 +47,43 @@ export default class LinkedList<Type> {
         return this;
     }
 
-    pop() {
+    pop(): Node<Type> | undefined {
         // Edge Case - 1: Empty List
-        if (!this.head) {
+        if (!this.head || !this.tail) {
+            // If the list is empty (no head), return undefined since there's nothing to remove
             return undefined;
         }
+
+        // Two or more items:
+        // Initializing two pointers starting at the head:
+
+        // temp - will move to the last node by the end of the while loop
+        let temp = this.head;
+        // prev - will be at the second to last node by the end of the while loop
+        let prev = this.head;
+
+        // When loop ends:
+        // - temp will be at the last node
+        // - prev will be at the second to last node
+        while (temp.next) {
+            prev = temp;
+            temp = temp.next;
+        }
+
+        // Setting tail to the second to last node (prev)
+        this.tail = prev;
+        // Removing last node from the list
+        this.tail.next = null;
+        this.length--;
+
+        // Edge Case - 2: One item
+        if (this.length === 0) {
+            // When length becomes 0, we need to set both head and tail to null
+            this.head = null;
+            this.tail = null;
+        }
+
+        // Returning removed (last) node
+        return temp;
     }
 }

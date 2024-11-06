@@ -7,11 +7,5 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   </div>
 `;
 
-interface Person {
-    name: string;
-    age: number;
-}
-
-const personList = new LinkedList<Person>({ name: "John", age: 23 });
-personList.push({ name: "Peter", age: 35 });
-console.log(personList);
+const myList = new LinkedList<string | number>(1);
+console.log(myList);
