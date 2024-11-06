@@ -61,6 +61,10 @@ export default class LinkedList<T> {
         return this;
     }
 
+    /**
+     * Removes and returns the last node in the list
+     * @returns The removed node or undefined if list is empty
+     */
     pop(): Node<T> | undefined {
         // Edge Case - 1: Empty List
         if (!this.head || !this.tail) {
