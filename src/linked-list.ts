@@ -120,4 +120,9 @@ export default class LinkedList<T> {
         }
         return values;
     }
+
+    // Utility method to get the length
+    getLength(): number {
+        return this.length;
+    }
 }
