@@ -125,4 +125,9 @@ export default class LinkedList<T> {
     getLength(): number {
         return this.length;
     }
+
+    // Utility method to check if list is empty
+    isEmpty(): boolean {
+        return this.length === 0;
+    }
 }
