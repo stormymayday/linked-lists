@@ -1,49 +1,63 @@
+// Node class represents each element in the LinkedList
+// Generic type T allows for flexible data types
 class Node<T> {
     value: T;
     next: Node<T> | null;
 
     constructor(value: T) {
+        // Storing the data
         this.value = value;
+        // Initializing next pointer to null
         this.next = null;
     }
 }
 
 export default class LinkedList<T> {
+    // Head pointer - reference to first node in list
     head: Node<T> | null;
-    // head: Node<T>;
+    // Tail pointer - reference to last node in list
     tail: Node<T> | null;
-    // tail: Node<T>;
+    // Number of nodes in list
     length: number;
 
     constructor(value: T) {
+        // Creating new node with given value
         const newNode = new Node(value);
 
+        // For first node, head and tail point to it
         this.head = newNode;
         this.tail = this.head;
+
+        // List starts with one node
         this.length = 1;
     }
 
+    /**
+     * Adds a new node to the end of the list
+     * @param value - The value to add
+     * @returns The linked list instance
+     */
     push(value: T): LinkedList<T> {
-        // 1. Creating a new node with a given value
+        // Creating a new node with a given value
         const newNode = new Node(value);
 
-        // 2. (Edge Case) Checking if the list is empty
+        // (Edge Case) Checking if the list is empty
         if (!this.head || !this.tail) {
-            // 2a. If empty, setting head and tail to the new node
+            // If empty, setting head and tail to the new node
             this.head = newNode;
             this.tail = newNode;
         } else {
-            // 3. Connecting current tail's next pointer to the new node
+            // Connecting current tail's next pointer to the new node
             this.tail.next = newNode;
 
-            // 4. Moving the tail pointer to the new node
+            // Moving the tail pointer to the new node
             this.tail = newNode;
         }
 
-        // 5. Incrementing the length
+        // Incrementing the length
         this.length++;
 
-        // 6. Returning the entire list
+        // Returning the entire list
         return this;
     }
 
