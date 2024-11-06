@@ -109,4 +109,15 @@ export default class LinkedList<T> {
         // Return the list
         return this;
     }
+
+    // Utility method to print the list values
+    printList(): T[] {
+        const values: T[] = [];
+        let current = this.head;
+        while (current) {
+            values.push(current.value);
+            current = current.next;
+        }
+        return values;
+    }
 }
