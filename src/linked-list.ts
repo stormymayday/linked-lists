@@ -105,6 +105,11 @@ export default class LinkedList<T> {
         return temp;
     }
 
+    /**
+     * Adds a new node to the start of the list
+     * @param value - The value to add
+     * @returns The linked list instance
+     */
     unshift(value: T): LinkedList<T> {
         // Creating a new node with the given value
         const newNode = new Node(value);
