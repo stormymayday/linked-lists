@@ -133,6 +133,38 @@ export default class LinkedList<T> {
         return this;
     }
 
+    /**
+     * Removes and returns the first node in the list
+     * @returns {Node<T> | undefined} The removed node or undefined if list is empty
+     */
+    shift(): Node<T> | undefined {
+        // Edge Case: If list is empty, return undefined
+        if (!this.head) {
+            return undefined;
+        } else {
+            // Store the current head node
+            let temp = this.head;
+
+            // Move head pointer to the next node
+            this.head = this.head.next;
+
+            // Disconnect the removed node from list
+            temp.next = null;
+
+            // Decrement length
+            this.length--;
+
+            // Edge Case: If list is now empty (had only one node)
+            if (this.length === 0) {
+                // Set tail to null
+                this.tail = null;
+            }
+
+            // Return the removed node
+            return temp;
+        }
+    }
+
     // Utility method to print the list values
     printList(): T[] {
         const values: T[] = [];

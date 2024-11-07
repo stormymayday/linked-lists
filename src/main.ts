@@ -8,9 +8,12 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `;
 
 const myList = new LinkedList<string | number>(1);
+console.log(myList.printList());
 myList.unshift(0);
 console.log(myList.printList());
-console.log(myList.getLength());
-myList.pop();
-myList.pop();
-console.log(myList.isEmpty());
+myList.shift();
+console.log(myList.printList());
+myList.shift();
+console.log(myList.printList());
+myList.shift();
+console.log(myList.printList());
