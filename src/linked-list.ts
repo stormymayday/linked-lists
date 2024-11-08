@@ -142,7 +142,7 @@ export default class LinkedList<T> {
         if (!this.head) {
             return undefined;
         } else {
-            // Store the current head node
+            // Storing the current head pointer
             let temp = this.head;
 
             // Move head pointer to the next node
@@ -163,6 +163,30 @@ export default class LinkedList<T> {
             // Return the removed node
             return temp;
         }
+    }
+
+    /**
+     * Retrieves the node at the specified index
+     * @param index - Zero-based index of the node to retrieve
+     * @returns {Node<T> | undefined} The node at the specified index or undefined if index is invalid or list is empty
+     */
+    get(index: number): Node<T> | undefined {
+        // Edge Case: Checking if index is out of bounds or list is empty
+        if (index < 0 || index >= this.length || !this.head) {
+            return undefined;
+        }
+
+        // Storing the current head pointer
+        let temp: Node<T> | null = this.head;
+
+        // Traversing the list to the desired index
+        for (let i = 0; i < index; i++) {
+            // Moving temp to the next node
+            temp = temp!.next;
+        }
+
+        // Return the node at the index
+        return temp ?? undefined;
     }
 
     // Utility method to print the list values
