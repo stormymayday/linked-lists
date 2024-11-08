@@ -179,7 +179,7 @@ export default class LinkedList<T> {
         // Storing the current head pointer
         let temp: Node<T> | null = this.head;
 
-        // Traversing the list to the desired index
+        // Traversing the list to the specified index
         for (let i = 0; i < index; i++) {
             // Moving temp to the next node
             temp = temp!.next;
@@ -187,6 +187,39 @@ export default class LinkedList<T> {
 
         // Return the node at the index
         return temp ?? undefined;
+    }
+
+    /**
+     * Updates the value of the node at the specified index
+     * @param index - Zero-based index of the node to update
+     * @param value - New value to set for the node
+     * @returns {boolean} True if the update was successful, false if the index is invalid
+     */
+    set(index: number, value: T): boolean {
+        // // Checking if index is out of bounds or list is empty
+        // if (index < 0 || index >= this.length || !this.head) {
+        //     return false;
+        // }
+
+        // // Storing the current head pointer
+        // let temp: Node<T> | null = this.head;
+
+        // // Traversing the list to the specified index
+        // for (let i = 0; i < index; i++) {
+        //     // Moving temp to the next node
+        //     temp = temp!.next;
+        // }
+
+        // Using the get method to retrieve the node at the specified index
+        let temp = this.get(index);
+
+        // If the node exists at the index, update its value
+        if (temp) {
+            temp.value = value;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // Utility method to print the list values
