@@ -259,6 +259,44 @@ export default class LinkedList<T> {
         }
     }
 
+    /**
+     * Removes the node at the specified index
+     * @param index - Zero-based index of the node to remove
+     * @returns {Node<T> | undefined} The removed node, or undefined if index is invalid
+     */
+    remove(index: number): Node<T> | undefined {
+        // Edge Case: Checking if index is out of bounds
+        if (index < 0 || index >= this.length) {
+            return undefined;
+        }
+
+        // Removing the first node
+        if (index === 0) {
+            return this.shift();
+        }
+
+        // Removing the last node
+        if (index === this.length - 1) {
+            return this.pop();
+        }
+
+        // Retrieve the node before the one to be removed
+        const before = this.get(index - 1);
+        // `before` is guaranteed to be non-null here
+        const temp = before!.next!;
+
+        // Moving before's pointer past temp
+        before!.next = temp.next;
+        // Removing temp from the list
+        temp.next = null;
+
+        // Decrementing the length
+        this.length--;
+
+        // Returning the removed node
+        return temp;
+    }
+
     // Utility method to print the list values
     printList(): T[] {
         const values: T[] = [];
