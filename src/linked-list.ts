@@ -297,6 +297,38 @@ export default class LinkedList<T> {
         return temp;
     }
 
+    /**
+     * Reverses the linked list in place
+     * @returns {LinkedList<T>} The reversed linked list
+     */
+    reverse(): LinkedList<T> {
+        // Swapping head and tail
+        let temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+        // Initializing pointers for reversal
+        let next: Node<T> | null = null;
+        let prev: Node<T> | null = null;
+
+        // Iterating through the list and reversing links
+        for (let i = 0; i < this.length; i++) {
+            // Storing next node
+            next = temp!.next;
+
+            // Reversing the current node's pointer
+            temp!.next = prev;
+
+            // Moving prev forward
+            prev = temp;
+
+            // Move temp forward to the next node
+            temp = next;
+        }
+
+        return this;
+    }
+
     // Utility method to print the list values
     printList(): T[] {
         const values: T[] = [];

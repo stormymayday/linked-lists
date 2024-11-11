@@ -11,9 +11,12 @@ const myList = new LinkedList<string | number | number[]>(1);
 console.log(myList.printList());
 myList.unshift(0);
 console.log(myList.printList());
-// console.log(myList.get(-1));
-myList.set(0, "hello");
-console.log(myList.get(0));
-myList.set(1, [1, 2, 3]);
-console.log(myList.get(1));
-// console.log(myList.get(2));
+
+console.log(myList.insert(2, "insert value"));
+console.log(myList.printList());
+
+console.log(myList.remove(3));
+console.log(myList.printList());
+
+myList.reverse();
+console.log(myList.printList());
