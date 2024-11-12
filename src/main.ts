@@ -8,15 +8,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `;
 
 const myList = new LinkedList<string | number | number[]>(1);
+// myList.push(2);
+// myList.push(3);
+// myList.push(4);
+// myList.pop();
 console.log(myList.printList());
-myList.unshift(0);
-console.log(myList.printList());
-
-console.log(myList.insert(2, "insert value"));
-console.log(myList.printList());
-
-console.log(myList.remove(3));
-console.log(myList.printList());
-
-myList.reverse();
-console.log(myList.printList());
+console.log(myList.findMiddleNode());

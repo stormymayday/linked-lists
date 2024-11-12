@@ -329,6 +329,26 @@ export default class LinkedList<T> {
         return this;
     }
 
+    findMiddleNode() {
+        // 1. Initialize slow pointer to the head of the list
+        let slow: Node<T> | null = this.head;
+
+        // 2. Initialize fast pointer to the head of the list
+        let fast: Node<T> | null = this.head;
+
+        // 3. Loop while fast pointer is not null and fast pointer's next node is not null
+        while (fast !== null && fast.next !== null) {
+            // a. Move slow pointer one step ahead in the list
+            slow = slow!.next;
+
+            // b. Move fast pointer two steps ahead in the list
+            fast = fast.next.next;
+        }
+
+        // 4. Return slow pointer (middle node found)
+        return slow;
+    }
+
     // Utility method to print the list values
     printList(): T[] {
         const values: T[] = [];
