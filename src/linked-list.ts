@@ -1,5 +1,7 @@
-// Node class represents each element in the LinkedList
-// Generic type T allows for flexible data types
+/**
+ * Represents a single node in the LinkedList.
+ * @template T - The type of value held in each node.
+ */
 class Node<T> {
     value: T;
     next: Node<T> | null;
@@ -33,9 +35,9 @@ export default class LinkedList<T> {
     }
 
     /**
-     * Adds a new node to the end of the list
-     * @param value - The value to add
-     * @returns The linked list instance
+     * Adds a new node to the end of the list.
+     * @param value - The value to add.
+     * @returns {LinkedList<T>} The linked list instance.
      */
     push(value: T): LinkedList<T> {
         // Creating a new node with a given value
@@ -62,8 +64,8 @@ export default class LinkedList<T> {
     }
 
     /**
-     * Removes and returns the last node in the list
-     * @returns The removed node or undefined if list is empty
+     * Removes and returns the last node in the list.
+     * @returns {Node<T> | undefined} The removed node or undefined if list is empty.
      */
     pop(): Node<T> | undefined {
         // Edge Case - 1: Empty List
@@ -106,9 +108,9 @@ export default class LinkedList<T> {
     }
 
     /**
-     * Adds a new node to the start of the list
-     * @param value - The value to add
-     * @returns The linked list instance
+     * Adds a new node to the start of the list.
+     * @param value - The value to add.
+     * @returns {LinkedList<T>} The linked list instance.
      */
     unshift(value: T): LinkedList<T> {
         // Creating a new node with the given value
@@ -196,20 +198,6 @@ export default class LinkedList<T> {
      * @returns {boolean} True if the update was successful, false if the index is invalid
      */
     set(index: number, value: T): boolean {
-        // // Checking if index is out of bounds or list is empty
-        // if (index < 0 || index >= this.length || !this.head) {
-        //     return false;
-        // }
-
-        // // Storing the current head pointer
-        // let temp: Node<T> | null = this.head;
-
-        // // Traversing the list to the specified index
-        // for (let i = 0; i < index; i++) {
-        //     // Moving temp to the next node
-        //     temp = temp!.next;
-        // }
-
         // Using the get method to retrieve the node at the specified index
         let temp = this.get(index);
 
@@ -329,7 +317,11 @@ export default class LinkedList<T> {
         return this;
     }
 
-    findMiddleNode() {
+    /**
+     * Finds the middle node of the list.
+     * @returns {Node<T> | null} The middle node or null if list is empty.
+     */
+    findMiddleNode(): Node<T> | null {
         // 1. Initialize slow pointer to the head of the list
         let slow: Node<T> | null = this.head;
 
@@ -349,7 +341,36 @@ export default class LinkedList<T> {
         return slow;
     }
 
-    // Utility method to print the list values
+    /**
+     * Detects if there is a loop in the linked list using Floyd's cycle-finding algorithm.
+     * @returns {boolean} True if there is a loop, otherwise false.
+     */
+    hasLoop(): boolean {
+        let slow: Node<T> | null = this.head;
+        let fast: Node<T> | null = this.head;
+
+        // Traverse the list with two pointers
+        while (fast && fast.next) {
+            // Move slow pointer by one step if it exists
+            slow = slow ? slow.next : null;
+
+            // Move fast pointer by two steps
+            fast = fast.next.next;
+
+            // If the slow and fast pointers meet, there is a cycle
+            if (slow === fast) {
+                return true;
+            }
+        }
+
+        // If fast reaches the end (null), there is no cycle
+        return false;
+    }
+
+    /**
+     * Prints all values in the linked list.
+     * @returns {T[]} An array of all values in the linked list.
+     */
     printList(): T[] {
         const values: T[] = [];
         let current = this.head;
@@ -360,12 +381,18 @@ export default class LinkedList<T> {
         return values;
     }
 
-    // Utility method to get the length
+    /**
+     * Utility method to get the current length of the linked list.
+     * @returns {number} The number of nodes in the linked list.
+     */
     getLength(): number {
         return this.length;
     }
 
-    // Utility method to check if list is empty
+    /**
+     * Checks if the list is empty.
+     * @returns {boolean} True if the list is empty, otherwise false.
+     */
     isEmpty(): boolean {
         return this.length === 0;
     }
