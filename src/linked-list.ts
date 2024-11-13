@@ -7,30 +7,22 @@ class Node<T> {
     next: Node<T> | null;
 
     constructor(value: T) {
-        // Storing the data
         this.value = value;
-        // Initializing next pointer to null
         this.next = null;
     }
 }
 
 export default class LinkedList<T> {
-    // Head pointer - reference to first node in list
     head: Node<T> | null;
-    // Tail pointer - reference to last node in list
     tail: Node<T> | null;
-    // Number of nodes in list
     length: number;
 
     constructor(value: T) {
-        // Creating new node with given value
         const newNode = new Node(value);
 
-        // For first node, head and tail point to it
         this.head = newNode;
         this.tail = this.head;
 
-        // List starts with one node
         this.length = 1;
     }
 
@@ -45,7 +37,6 @@ export default class LinkedList<T> {
 
         // (Edge Case) Checking if the list is empty
         if (!this.head || !this.tail) {
-            // If empty, setting head and tail to the new node
             this.head = newNode;
             this.tail = newNode;
         } else {
@@ -56,10 +47,8 @@ export default class LinkedList<T> {
             this.tail = newNode;
         }
 
-        // Incrementing the length
         this.length++;
 
-        // Returning the entire list
         return this;
     }
 
