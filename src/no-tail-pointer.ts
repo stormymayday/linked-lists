@@ -26,7 +26,7 @@ class MyLinkedList {
             temp = temp!.next;
         }
 
-        return temp.value;
+        return temp!.value;
     }
 
     addAtHead(val: number): void {
@@ -66,7 +66,7 @@ class MyLinkedList {
 
             let prev = this.head;
             for (let i = 0; i < index - 1; i++) {
-                prev = prev.next;
+                prev = prev!.next;
             }
             if (prev) {
                 newNode.next = prev.next;
@@ -85,7 +85,7 @@ class MyLinkedList {
         } else {
             let prev = this.head;
             for (let i = 0; i < index - 1; i++) {
-                prev = prev.next;
+                prev = prev!.next;
             }
             if (prev && prev.next) {
                 prev.next = prev.next.next;
