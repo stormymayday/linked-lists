@@ -364,24 +364,27 @@ export default class LinkedList<T> {
     findKthFromEnd(k: number): Node<T> | null {
         if (k < 0) return null;
 
+        // Initializing left and right pointers at the head
         let left: Node<T> | null = this.head;
         let right: Node<T> | null = this.head;
 
-        // Moving right pointer to 'k' nodes ahead
+        // Move right pointer k steps ahead
         for (let i = 0; i < k; i++) {
-            // k is larger than the list length
+            // If right reaches null, k is out of range
             if (!right) {
                 return null;
             }
             right = right.next;
         }
 
-        // Moving both pointers until right reaches the end
+        // Iterating until right reaches the end
         while (right) {
+            // Moving both pointers one step ahead
             left = left!.next;
             right = right.next;
         }
 
+        // When right reaches end, left is at kth from end
         return left;
     }
 
