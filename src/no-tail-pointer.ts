@@ -16,73 +16,81 @@ class MyLinkedList {
         this.length = 0;
     }
 
-    getNode(index: number): Node | null {
-        if (index < 0 || index >= this.length) return null;
-        let current = this.head;
-        for (let i = 0; i < index; i++) {
-            current = current!.next;
-        }
-        return current;
-    }
-
     get(index: number): number {
-        const node = this.getNode(index);
-        return node ? node.value : -1;
+        if (index < 0 || index >= this.length) {
+            return -1;
+        }
+
+        let temp = this.head;
+        for (let i = 0; i < index; i++) {
+            temp = temp!.next;
+        }
+
+        return temp.value;
     }
 
     addAtHead(val: number): void {
         const newNode = new Node(val);
-        newNode.next = this.head;
-        this.head = newNode;
+
+        if (!this.head) {
+            this.head = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+
         this.length++;
     }
 
     addAtTail(val: number): void {
         if (!this.head) {
             this.addAtHead(val);
-            return;
+        } else {
+            const newNode = new Node(val);
+            let temp = this.head;
+            while (temp.next) {
+                temp = temp.next;
+            }
+            temp.next = newNode;
+            this.length++;
         }
-        const newNode = new Node(val);
-        let current = this.head;
-        while (current.next) {
-            current = current.next;
-        }
-        current.next = newNode;
-        this.length++;
     }
 
     addAtIndex(index: number, val: number): void {
         if (index < 0 || index > this.length) {
             return;
-        }
-        if (index === 0) {
+        } else if (index === 0) {
             this.addAtHead(val);
-            return;
-        }
-
-        const prev = this.getNode(index - 1);
-        if (prev) {
+        } else {
             const newNode = new Node(val);
-            newNode.next = prev.next;
-            prev.next = newNode;
-            this.length++;
+
+            let prev = this.head;
+            for (let i = 0; i < index - 1; i++) {
+                prev = prev.next;
+            }
+            if (prev) {
+                newNode.next = prev.next;
+                prev.next = newNode;
+                this.length++;
+            }
         }
     }
 
     deleteAtIndex(index: number): void {
         if (index < 0 || index >= this.length) {
             return;
-        }
-
-        if (index === 0) {
+        } else if (index === 0) {
             this.head = this.head!.next;
             this.length--;
-            return;
-        }
-        const prev = this.getNode(index - 1);
-        if (prev && prev.next) {
-            prev.next = prev.next.next;
-            this.length--;
+        } else {
+            let prev = this.head;
+            for (let i = 0; i < index - 1; i++) {
+                prev = prev.next;
+            }
+            if (prev && prev.next) {
+                prev.next = prev.next.next;
+                this.length--;
+            }
         }
     }
 }
