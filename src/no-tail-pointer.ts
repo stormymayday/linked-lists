@@ -7,7 +7,7 @@ class Node {
     }
 }
 
-class MyLinkedList {
+export class MyLinkedList {
     head: Node | null;
     length: number;
 
@@ -19,14 +19,13 @@ class MyLinkedList {
     get(index: number): number {
         if (index < 0 || index >= this.length) {
             return -1;
+        } else {
+            let current = this.head;
+            for (let i = 0; i < index; i++) {
+                current = current!.next;
+            }
+            return current!.value;
         }
-
-        let temp = this.head;
-        for (let i = 0; i < index; i++) {
-            temp = temp!.next;
-        }
-
-        return temp!.value;
     }
 
     addAtHead(val: number): void {
@@ -47,11 +46,12 @@ class MyLinkedList {
             this.addAtHead(val);
         } else {
             const newNode = new Node(val);
-            let temp = this.head;
-            while (temp.next) {
-                temp = temp.next;
+
+            let current = this.head;
+            while (current.next) {
+                current = current.next;
             }
-            temp.next = newNode;
+            current.next = newNode;
             this.length++;
         }
     }
@@ -64,15 +64,13 @@ class MyLinkedList {
         } else {
             const newNode = new Node(val);
 
-            let prev = this.head;
+            let current = this.head;
             for (let i = 0; i < index - 1; i++) {
-                prev = prev!.next;
+                current = current!.next;
             }
-            if (prev) {
-                newNode.next = prev.next;
-                prev.next = newNode;
-                this.length++;
-            }
+            newNode.next = current!.next;
+            current!.next = newNode;
+            this.length++;
         }
     }
 
@@ -83,14 +81,12 @@ class MyLinkedList {
             this.head = this.head!.next;
             this.length--;
         } else {
-            let prev = this.head;
+            let current = this.head;
             for (let i = 0; i < index - 1; i++) {
-                prev = prev!.next;
+                current = current!.next;
             }
-            if (prev && prev.next) {
-                prev.next = prev.next.next;
-                this.length--;
-            }
+            current!.next = current!.next!.next;
+            this.length--;
         }
     }
 }
