@@ -1,6 +1,6 @@
 import "./style.css";
 import LinkedList from "./linked-list";
-import { MyLinkedList } from "./no-tail-pointer";
+// import { MyLinkedList } from "./no-tail-pointer";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="linkedlist-visualizer">

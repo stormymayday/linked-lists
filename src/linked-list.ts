@@ -357,6 +357,35 @@ export default class LinkedList<T> {
     }
 
     /**
+     * Finds Kth node from the end
+     * @param k - Kth number from the end
+     * @returns {Node<T> | null} Kth node from the end, or null
+     */
+    findKthFromEnd(k: number): Node<T> | null {
+        if (k < 0) return null;
+
+        let left: Node<T> | null = this.head;
+        let right: Node<T> | null = this.head;
+
+        // Moving right pointer to 'k' nodes ahead
+        for (let i = 0; i < k; i++) {
+            // k is larger than the list length
+            if (!right) {
+                return null;
+            }
+            right = right.next;
+        }
+
+        // Moving both pointers until right reaches the end
+        while (right) {
+            left = left!.next;
+            right = right.next;
+        }
+
+        return left;
+    }
+
+    /**
      * Prints all values in the linked list.
      * @returns {T[]} An array of all values in the linked list.
      */
