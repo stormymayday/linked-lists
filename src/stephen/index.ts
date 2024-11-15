@@ -39,4 +39,8 @@ class LinkedList {
         }
         return current;
     }
+
+    clear(): void {
+        this.head = null;
+    }
 }
