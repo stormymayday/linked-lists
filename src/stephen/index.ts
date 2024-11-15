@@ -26,4 +26,8 @@ class LinkedList {
         }
         return count;
     }
+
+    getFirst(): Node | null {
+        return this.head;
+    }
 }
