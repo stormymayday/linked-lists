@@ -12,4 +12,8 @@ class LinkedList {
     constructor() {
         this.head = null;
     }
+
+    insertFirst(data: number): void {
+        this.head = new Node(data, this.head);
+    }
 }
