@@ -48,4 +48,24 @@ class LinkedList {
         if (!this.head) return;
         this.head = this.head.next;
     }
+
+    removeLast(): void {
+        // Empty List
+        if (!this.head) return;
+
+        // One node
+        if (!this.head.next) {
+            this.head = null;
+            return;
+        }
+
+        // Two or more nodes
+        let prev = this.head;
+        let current = this.head.next;
+        while (current.next) {
+            prev = current;
+            current = current.next;
+        }
+        prev.next = null;
+    }
 }
