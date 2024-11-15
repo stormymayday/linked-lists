@@ -1,13 +1,14 @@
 class Node {
     value: number;
     next: Node | null;
-    constructor(value?: number) {
-        this.value = value === undefined ? 0 : value;
+
+    constructor(value: number) {
+        this.value = value;
         this.next = null;
     }
 }
 
-export class MyLinkedList {
+class MyLinkedList {
     head: Node | null;
     length: number;
 
@@ -16,42 +17,40 @@ export class MyLinkedList {
         this.length = 0;
     }
 
-    get(index: number): number {
+    private getNode(index: number): Node | null {
         if (index < 0 || index >= this.length) {
-            return -1;
-        } else {
-            let current = this.head;
-            for (let i = 0; i < index; i++) {
-                current = current!.next;
-            }
-            return current!.value;
+            return null;
         }
+
+        let current = this.head;
+        for (let i = 0; i < index && current !== null; i++) {
+            current = current.next;
+        }
+        return current;
+    }
+
+    get(index: number): number {
+        const node = this.getNode(index);
+        return node ? node.value : -1;
     }
 
     addAtHead(val: number): void {
         const newNode = new Node(val);
-
-        if (!this.head) {
-            this.head = newNode;
-        } else {
-            newNode.next = this.head;
-            this.head = newNode;
-        }
-
+        newNode.next = this.head;
+        this.head = newNode;
         this.length++;
     }
 
     addAtTail(val: number): void {
-        if (!this.head) {
+        if (this.length === 0) {
             this.addAtHead(val);
-        } else {
-            const newNode = new Node(val);
+            return;
+        }
 
-            let current = this.head;
-            while (current.next) {
-                current = current.next;
-            }
-            current.next = newNode;
+        const newNode = new Node(val);
+        const lastNode = this.getNode(this.length - 1);
+        if (lastNode) {
+            lastNode.next = newNode;
             this.length++;
         }
     }
@@ -59,17 +58,19 @@ export class MyLinkedList {
     addAtIndex(index: number, val: number): void {
         if (index < 0 || index > this.length) {
             return;
-        } else if (index === 0) {
-            this.addAtHead(val);
-        } else {
-            const newNode = new Node(val);
+        }
 
-            let current = this.head;
-            for (let i = 0; i < index - 1; i++) {
-                current = current!.next;
-            }
-            newNode.next = current!.next;
-            current!.next = newNode;
+        if (index === 0) {
+            this.addAtHead(val);
+            return;
+        }
+
+        const newNode = new Node(val);
+        const prevNode = this.getNode(index - 1);
+
+        if (prevNode) {
+            newNode.next = prevNode.next;
+            prevNode.next = newNode;
             this.length++;
         }
     }
@@ -77,15 +78,19 @@ export class MyLinkedList {
     deleteAtIndex(index: number): void {
         if (index < 0 || index >= this.length) {
             return;
-        } else if (index === 0) {
-            this.head = this.head!.next;
-            this.length--;
-        } else {
-            let current = this.head;
-            for (let i = 0; i < index - 1; i++) {
-                current = current!.next;
+        }
+
+        if (index === 0) {
+            if (this.head) {
+                this.head = this.head.next;
+                this.length--;
             }
-            current!.next = current!.next!.next;
+            return;
+        }
+
+        const prevNode = this.getNode(index - 1);
+        if (prevNode && prevNode.next) {
+            prevNode.next = prevNode.next.next;
             this.length--;
         }
     }
