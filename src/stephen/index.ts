@@ -117,4 +117,15 @@ class LinkedList {
         if (!prev || !prev.next) return;
         prev.next = prev.next.next;
     }
+
+    insertAt(data: number, index: number): void {
+        if (index < 0) return;
+
+        if (index === 0) {
+            this.insertFirst(data);
+            return;
+        }
+
+        const newNode = new Node(data);
+    }
 }
