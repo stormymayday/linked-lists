@@ -119,13 +119,40 @@ class LinkedList {
     }
 
     insertAt(data: number, index: number): void {
-        if (index < 0) return;
+        // if (index < 0) return;
+        // if (index === 0) {
+        //     this.insertFirst(data);
+        //     return;
+        // }
+        // let prev = this.getAt(index - 1);
+        // if(!prev) return;
+        // let newNode = new Node(data);
+        // if(!prev.next) {
+        //     prev.next = newNode;
+        // } else {
+        //     newNode.next = prev.next;
+        //     prev.next = newNode;
+        // }
 
-        if (index === 0) {
-            this.insertFirst(data);
+        if (!this.head) {
+            this.head = new Node(data);
             return;
         }
+        if (index === 0) {
+            this.head = new Node(data, this.head);
+            return;
+        }
+        const prev = this.getAt(index - 1) || this.getLast();
+        if (!prev) return;
+        const newNode = new Node(data, prev.next);
+        prev.next = newNode;
+    }
 
-        const newNode = new Node(data);
+    forEach(fn: (node: Node) => void): void {
+        let current = this.head;
+        while (current) {
+            fn(current);
+            current = current.next;
+        }
     }
 }
