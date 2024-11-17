@@ -163,4 +163,21 @@ class LinkedList {
             node = node.next;
         }
     }
+
+    midpoint(): Node | null {
+        // List is empty
+        if (!this.head) return null;
+
+        // One node
+        if (!this.head.next) return this.head;
+
+        let slow: Node | null = this.head;
+        let fast: Node | null = this.head;
+        // For even lists, returns the left middle node
+        while (fast.next && fast.next.next) {
+            slow = slow!.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
 }
