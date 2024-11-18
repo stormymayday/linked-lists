@@ -403,13 +403,9 @@ export default class LinkedList {
 
         while (current) {
             if (current.value < x) {
-                // ptr1.next = current;
-                // ptr1 = current;
                 ptr1.next = new Node(current.value);
                 ptr1 = ptr1.next;
             } else {
-                // ptr2.next = current;
-                // ptr2 = current;
                 ptr2.next = new Node(current.value);
                 ptr2 = ptr2.next;
             }
@@ -422,6 +418,50 @@ export default class LinkedList {
 
         this.head = dummy1.next;
         this.tail = ptr2;
+    }
+
+    /**
+     * Removes all duplicate values from the linked list, keeping only the first occurrence of each value.
+     * Uses a Set to track seen values, making it an O(n) time complexity operation.
+     *
+     * Example:
+     * Before: 1 -> 2 -> 2 -> 3 -> 1 -> 4
+     * After:  1 -> 2 -> 3 -> 4
+     *
+     * Time Complexity: O(n) where n is the number of nodes in the list
+     * Space Complexity: O(n) to store the Set of unique values
+     *
+     * @returns {void}
+     */
+    removeDuplicates(): void {
+        // Handle empty list case
+        if (!this.head) return;
+
+        // Create a Set to track unique values
+        const uniqueValues: Set<number> = new Set();
+
+        let prev: Node | null = null;
+        let current: Node | null = this.head;
+
+        // Traverse the list
+        while (current) {
+            if (uniqueValues.has(current.value)) {
+                // Remove duplicate node
+                prev!.next = current.next;
+
+                // Update tail if we're removing the last node
+                if (current === this.tail) {
+                    this.tail = prev;
+                }
+
+                this.length--;
+            } else {
+                // Add new value to Set and move prev pointer
+                uniqueValues.add(current.value);
+                prev = current;
+            }
+            current = current.next;
+        }
     }
 
     /**
