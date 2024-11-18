@@ -1,23 +1,19 @@
-/**
- * Represents a single node in the LinkedList.
- * @template T - The type of value held in each node.
- */
-class Node<T> {
-    value: T;
-    next: Node<T> | null;
+class Node {
+    value: number;
+    next: Node | null;
 
-    constructor(value: T) {
+    constructor(value: number) {
         this.value = value;
         this.next = null;
     }
 }
 
-export default class LinkedList<T> {
-    head: Node<T> | null;
-    tail: Node<T> | null;
+export default class LinkedList {
+    head: Node | null;
+    tail: Node | null;
     length: number;
 
-    constructor(value: T) {
+    constructor(value: number) {
         const newNode = new Node(value);
 
         this.head = newNode;
@@ -29,9 +25,9 @@ export default class LinkedList<T> {
     /**
      * Adds a new node to the end of the list.
      * @param value - The value to add.
-     * @returns {LinkedList<T>} The linked list instance.
+     * @returns {LinkedList} The linked list instance.
      */
-    push(value: T): LinkedList<T> {
+    push(value: number): LinkedList {
         // Creating a new node with a given value
         const newNode = new Node(value);
 
@@ -54,9 +50,9 @@ export default class LinkedList<T> {
 
     /**
      * Removes and returns the last node in the list.
-     * @returns {Node<T> | undefined} The removed node or undefined if list is empty.
+     * @returns {Node | undefined} The removed node or undefined if list is empty.
      */
-    pop(): Node<T> | undefined {
+    pop(): Node | undefined {
         // Edge Case - 1: Empty List
         if (!this.head || !this.tail) {
             // If the list is empty (no head), return undefined since there's nothing to remove
@@ -99,9 +95,9 @@ export default class LinkedList<T> {
     /**
      * Adds a new node to the start of the list.
      * @param value - The value to add.
-     * @returns {LinkedList<T>} The linked list instance.
+     * @returns {LinkedList} The linked list instance.
      */
-    unshift(value: T): LinkedList<T> {
+    unshift(value: number): LinkedList {
         // Creating a new node with the given value
         const newNode = new Node(value);
 
@@ -126,9 +122,9 @@ export default class LinkedList<T> {
 
     /**
      * Removes and returns the first node in the list
-     * @returns {Node<T> | undefined} The removed node or undefined if list is empty
+     * @returns {Node | undefined} The removed node or undefined if list is empty
      */
-    shift(): Node<T> | undefined {
+    shift(): Node | undefined {
         // Edge Case: If list is empty, return undefined
         if (!this.head) {
             return undefined;
@@ -159,16 +155,16 @@ export default class LinkedList<T> {
     /**
      * Retrieves the node at the specified index
      * @param index - Zero-based index of the node to retrieve
-     * @returns {Node<T> | undefined} The node at the specified index or undefined if index is invalid or list is empty
+     * @returns {Node | undefined} The node at the specified index or undefined if index is invalid or list is empty
      */
-    get(index: number): Node<T> | undefined {
+    get(index: number): Node | undefined {
         // Edge Case: Checking if index is out of bounds or list is empty
         if (index < 0 || index >= this.length || !this.head) {
             return undefined;
         }
 
         // Storing the current head pointer
-        let temp: Node<T> | null = this.head;
+        let temp: Node | null = this.head;
 
         // Traversing the list to the specified index
         for (let i = 0; i < index; i++) {
@@ -186,7 +182,7 @@ export default class LinkedList<T> {
      * @param value - New value to set for the node
      * @returns {boolean} True if the update was successful, false if the index is invalid
      */
-    set(index: number, value: T): boolean {
+    set(index: number, value: number): boolean {
         // Using the get method to retrieve the node at the specified index
         let temp = this.get(index);
 
@@ -205,7 +201,7 @@ export default class LinkedList<T> {
      * @param value - Value to store in the new node
      * @returns {boolean} True if insertion was successful, false if index is invalid
      */
-    insert(index: number, value: T): boolean {
+    insert(index: number, value: number): boolean {
         // Checking if index is out of bounds
         if (index < 0 || index > this.length) {
             return false;
@@ -239,9 +235,9 @@ export default class LinkedList<T> {
     /**
      * Removes the node at the specified index
      * @param index - Zero-based index of the node to remove
-     * @returns {Node<T> | undefined} The removed node, or undefined if index is invalid
+     * @returns {Node | undefined} The removed node, or undefined if index is invalid
      */
-    remove(index: number): Node<T> | undefined {
+    remove(index: number): Node | undefined {
         // Edge Case: Checking if index is out of bounds
         if (index < 0 || index >= this.length) {
             return undefined;
@@ -276,17 +272,17 @@ export default class LinkedList<T> {
 
     /**
      * Reverses the linked list in place
-     * @returns {LinkedList<T>} The reversed linked list
+     * @returns {LinkedList} The reversed linked list
      */
-    reverse(): LinkedList<T> {
+    reverse(): LinkedList {
         // Swapping head and tail
         let temp = this.head;
         this.head = this.tail;
         this.tail = temp;
 
         // Initializing pointers for reversal
-        let next: Node<T> | null = null;
-        let prev: Node<T> | null = null;
+        let next: Node | null = null;
+        let prev: Node | null = null;
 
         // Iterating through the list and reversing links
         for (let i = 0; i < this.length; i++) {
@@ -308,14 +304,14 @@ export default class LinkedList<T> {
 
     /**
      * Finds the middle node of the list.
-     * @returns {Node<T> | null} The middle node or null if list is empty.
+     * @returns {Node | null} The middle node or null if list is empty.
      */
-    findMiddleNode(): Node<T> | null {
+    findMiddleNode(): Node | null {
         // 1. Initialize slow pointer to the head of the list
-        let slow: Node<T> | null = this.head;
+        let slow: Node | null = this.head;
 
         // 2. Initialize fast pointer to the head of the list
-        let fast: Node<T> | null = this.head;
+        let fast: Node | null = this.head;
 
         // 3. Loop while fast pointer is not null and fast pointer's next node is not null
         while (fast !== null && fast.next !== null) {
@@ -335,8 +331,8 @@ export default class LinkedList<T> {
      * @returns {boolean} True if there is a loop, otherwise false.
      */
     hasLoop(): boolean {
-        let slow: Node<T> | null = this.head;
-        let fast: Node<T> | null = this.head;
+        let slow: Node | null = this.head;
+        let fast: Node | null = this.head;
 
         // Traverse the list with two pointers
         while (fast && fast.next) {
@@ -359,14 +355,14 @@ export default class LinkedList<T> {
     /**
      * Finds Kth node from the end
      * @param k - Kth number from the end
-     * @returns {Node<T> | null} Kth node from the end, or null
+     * @returns {Node | null} Kth node from the end, or null
      */
-    findKthFromEnd(k: number): Node<T> | null {
+    findKthFromEnd(k: number): Node | null {
         if (k < 0) return null;
 
         // Initializing left and right pointers at the head
-        let left: Node<T> | null = this.head;
-        let right: Node<T> | null = this.head;
+        let left: Node | null = this.head;
+        let right: Node | null = this.head;
 
         // Move right pointer k steps ahead
         for (let i = 0; i < k; i++) {
@@ -386,6 +382,38 @@ export default class LinkedList<T> {
 
         // When right reaches end, left is at kth from end
         return left;
+    }
+
+    /**
+     *
+     */
+    partitionList(x: number): void {
+        if (!this.head) return;
+
+        let dummy1: Node | null = new Node(0);
+        let dummy2: Node | null = new Node(0);
+
+        let ptr1 = dummy1;
+        let ptr2 = dummy2;
+
+        let current: Node | null = this.head;
+
+        while (current) {
+            if (current.value < 3) {
+                ptr1.next = current;
+                ptr1 = current;
+            } else {
+                ptr2.next = current;
+                ptr2 = current;
+            }
+            current = current.next;
+        }
+
+        ptr1.next = dummy2.next;
+
+        ptr2.next = null;
+
+        this.head = dummy1.next;
     }
 
     /**
