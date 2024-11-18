@@ -180,4 +180,20 @@ class LinkedList {
         }
         return slow;
     }
+
+    circular(): boolean {
+        if (!this.head) return false;
+
+        let slow: Node | null = this.head;
+        let fast: Node | null = this.head;
+
+        while (fast && fast.next) {
+            slow = slow!.next;
+            fast = fast.next.next;
+            if (slow === fast) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
