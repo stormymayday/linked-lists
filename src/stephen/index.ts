@@ -196,4 +196,26 @@ class LinkedList {
         }
         return false;
     }
+
+    fromLast(n: number): Node | null {
+        if (n < 0) return null;
+
+        let left: Node | null = this.head;
+        let right: Node | null = this.head;
+
+        for (let i = 0; i < n; i++) {
+            if (!right) {
+                return null;
+            } else {
+                right = right.next;
+            }
+        }
+
+        while (right) {
+            left = left!.next;
+            right = right.next;
+        }
+
+        return left;
+    }
 }
