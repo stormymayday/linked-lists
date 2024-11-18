@@ -465,6 +465,37 @@ export default class LinkedList {
     }
 
     /**
+     * Converts a binary number represented as a linked list to its decimal equivalent.
+     * Each node should contain either 0 or 1, with the most significant bit at the head.
+     *
+     * Example:
+     * List: 1 -> 0 -> 1 -> 1
+     * Calculation: (1 * 2³) + (0 * 2²) + (1 * 2¹) + (1 * 2⁰) = 8 + 0 + 2 + 1 = 11
+     *
+     * Time Complexity: O(n) where n is the number of nodes in the list
+     * Space Complexity: O(1) as we only use a single number variable
+     *
+     * @returns {number} The decimal equivalent of the binary number
+     */
+    binaryToDecimal(): number {
+        // Handle empty list case
+        if (!this.head) return 0;
+
+        // Initialize decimal number
+        let num: number = 0;
+        let current: Node | null = this.head;
+
+        // Traverse the list, building the decimal number
+        while (current) {
+            // For each digit, multiply current result by 2 and add current digit
+            num = num * 2 + current.value;
+            current = current.next;
+        }
+
+        return num;
+    }
+
+    /**
      * Prints all values in the linked list.
      * @returns {number[]} An array of all values in the linked list.
      */
