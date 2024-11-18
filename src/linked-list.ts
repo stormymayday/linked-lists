@@ -385,7 +385,10 @@ export default class LinkedList {
     }
 
     /**
-     *
+     * Partitions the list around a value x, such that all nodes less than x come
+     * before all nodes greater than or equal to x. The original relative order
+     * of the nodes is preserved.
+     * @param x - The value to partition around
      */
     partitionList(x: number): void {
         if (!this.head) return;
@@ -399,12 +402,16 @@ export default class LinkedList {
         let current: Node | null = this.head;
 
         while (current) {
-            if (current.value < 3) {
-                ptr1.next = current;
-                ptr1 = current;
+            if (current.value < x) {
+                // ptr1.next = current;
+                // ptr1 = current;
+                ptr1.next = new Node(current.value);
+                ptr1 = ptr1.next;
             } else {
-                ptr2.next = current;
-                ptr2 = current;
+                // ptr2.next = current;
+                // ptr2 = current;
+                ptr2.next = new Node(current.value);
+                ptr2 = ptr2.next;
             }
             current = current.next;
         }
@@ -414,14 +421,15 @@ export default class LinkedList {
         ptr2.next = null;
 
         this.head = dummy1.next;
+        this.tail = ptr2;
     }
 
     /**
      * Prints all values in the linked list.
-     * @returns {T[]} An array of all values in the linked list.
+     * @returns {number[]} An array of all values in the linked list.
      */
-    printList(): T[] {
-        const values: T[] = [];
+    printList(): number[] {
+        const values: number[] = [];
         let current = this.head;
         while (current) {
             values.push(current.value);
