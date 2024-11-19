@@ -511,7 +511,7 @@ export default class LinkedList {
      * @returns {void}
      */
     reverseBetween(m: number, n: number): void {
-        if (!this.head || m >= n) return;
+        if (!this.head) return;
 
         let dummyNode: Node | null = new Node(0);
         dummyNode.next = this.head;
