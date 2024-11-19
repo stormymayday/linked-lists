@@ -496,6 +496,61 @@ export default class LinkedList {
     }
 
     /**
+     * Reverses a portion of the linked list between positions m and n (inclusive).
+     * Position counting starts at 0.
+     *
+     * Example:
+     * Before: 1 -> 2 -> 3 -> 4 -> 5, m = 1, n = 3
+     * After:  1 -> 4 -> 3 -> 2 -> 5
+     *
+     * Time Complexity: O(n) where n is the distance to position n
+     * Space Complexity: O(1) as we only use a constant amount of extra space
+     *
+     * @param m - Starting position (0-based indexing)
+     * @param n - Ending position (0-based indexing)
+     * @returns {void}
+     */
+    reverseBetween(m: number, n: number): void {
+        if (!this.head || m >= n) return;
+
+        let dummyNode: Node | null = new Node(0);
+        dummyNode.next = this.head;
+
+        let pre: Node | null = dummyNode;
+        let curr: Node | null = this.head;
+
+        for (let i = 0; i < m; i++) {
+            pre = curr;
+            if (curr.next) {
+                curr = curr.next;
+            } else {
+                return;
+            }
+        }
+
+        let beforeLeft: Node | null = pre;
+        let leftNode: Node | null = curr;
+
+        pre = null;
+        curr = leftNode;
+        let next: Node | null = null;
+        for (let i = 0; i < n - m + 1; i++) {
+            next = curr!.next;
+            curr!.next = pre;
+            pre = curr;
+            curr = next;
+        }
+
+        let rightNode: Node | null = pre;
+        let afterRight: Node | null = curr;
+
+        beforeLeft.next = rightNode;
+        leftNode.next = afterRight;
+
+        this.head = dummyNode.next;
+    }
+
+    /**
      * Prints all values in the linked list.
      * @returns {number[]} An array of all values in the linked list.
      */
