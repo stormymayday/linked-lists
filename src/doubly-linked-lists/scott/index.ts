@@ -8,3 +8,15 @@ class Node {
         this.prev = null;
     }
 }
+
+class DoublyLinkedList {
+    head: Node | null;
+    tail: Node | null;
+    length: number;
+    constructor(value: number) {
+        const newNode = new Node(value);
+        this.head = newNode;
+        this.tail = this.head;
+        this.length = 1;
+    }
+}
