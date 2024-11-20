@@ -9,7 +9,7 @@ class Node {
     }
 }
 
-class DoublyLinkedList {
+export class DoublyLinkedList {
     head: Node | null;
     tail: Node | null;
     length: number;
