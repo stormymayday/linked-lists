@@ -8,7 +8,7 @@ class Node {
     }
 }
 
-export default class LinkedList {
+export class LinkedList {
     head: Node | null;
     tail: Node | null;
     length: number;
