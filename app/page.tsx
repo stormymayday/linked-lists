@@ -1,7 +1,9 @@
-import SinglyLinkedList from "@/implementations/scott-barret";
+import LinkedList from "@/implementations/scott-barret";
 
 export default function Home() {
-    SinglyLinkedList();
+    const myLinkedList = new LinkedList(4);
+
+    console.log(myLinkedList);
 
     return (
         <main>
