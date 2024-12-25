@@ -1,4 +1,4 @@
-import SinglyLinkedList from "@/implementations/singly-linked-list-scott";
+import SinglyLinkedList from "@/implementations/scott-barret";
 
 export default function Home() {
     SinglyLinkedList();
