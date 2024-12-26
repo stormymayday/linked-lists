@@ -128,4 +128,28 @@ export default class LinkedList {
         // Return the removed node
         return temp;
     }
+
+    /**
+     * Retrieves the node at the specified index.
+     * @param index - The zero-based index of the node to retrieve.
+     * @returns The node at the given index, or null if the index is out of bounds.
+     */
+    get(index: number): Node | null {
+        // Edge Case: Checking if index is out of bounds or list is empty
+        if (index < 0 || index >= this.length || !this.head) {
+            return null;
+        }
+
+        // Storing the current head pointer
+        let temp: Node | null = this.head;
+
+        // Traversing the list to the specified index
+        for (let i = 0; i < index && temp; i++) {
+            // Moving temp to the next node
+            temp = temp.next;
+        }
+
+        // Return the node at the index
+        return temp;
+    }
 }
