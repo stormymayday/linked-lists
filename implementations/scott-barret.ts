@@ -102,4 +102,30 @@ export default class LinkedList {
         // Return the list
         return this;
     }
+
+    shift(): Node | null {
+        // Edge Case 1: If list is empty, return undefined
+        if (!this.head) return null;
+
+        // Storing the current head pointer
+        const temp = this.head;
+
+        // Move head pointer to the next node
+        this.head = this.head.next;
+
+        // Disconnect the to be removed node from list
+        temp.next = null;
+
+        // Decrement length
+        this.length--;
+
+        // Edge Case 2: If list is now empty (had only one node)
+        if (this.length === 0) {
+            // Set tail to null
+            this.tail = null;
+        }
+
+        // Return the removed node
+        return temp;
+    }
 }
