@@ -77,4 +77,29 @@ export default class LinkedList {
         // Returning removed (last) node
         return temp;
     }
+
+    unshift(value: number): LinkedList {
+        // Creating a new node with the given value
+        const newNode = new Node(value);
+
+        // Edge Case: Checking if list is empty
+        if (!this.head) {
+            // If empty, set both head and tail to new node
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            // If list not empty:
+            // Set new node's next pointer
+            newNode.next = this.head;
+
+            // Point head to the new node
+            this.head = newNode;
+        }
+
+        // Increment length
+        this.length++;
+
+        // Return the list
+        return this;
+    }
 }
