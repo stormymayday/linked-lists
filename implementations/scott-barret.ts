@@ -42,4 +42,39 @@ export default class LinkedList {
 
         return this;
     }
+
+    pop(): Node | null {
+        // Edge Case - 1: Empty List
+        if (!this.head) return null;
+
+        // Two or more items:
+        // Initializing two pointers starting at the head:
+        // pre - will be at the second to last node by the end of the while loop
+        let pre = this.head;
+        // temp - will move to the last node by the end of the while loop
+        let temp = this.head;
+
+        while (temp.next) {
+            pre = temp;
+            temp = temp.next;
+        }
+
+        // Setting tail to the second to last node (pre)
+        this.tail = pre;
+
+        // Removing last node from the list
+        this.tail.next = null;
+
+        this.length--;
+
+        // Edge Case - 2: One item
+        if (this.length === 0) {
+            // When length becomes 0, we need to set both head and tail to null
+            this.head = null;
+            this.tail = null;
+        }
+
+        // Returning removed (last) node
+        return temp;
+    }
 }
