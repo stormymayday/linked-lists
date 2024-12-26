@@ -152,4 +152,23 @@ export default class LinkedList {
         // Return the node at the index
         return temp;
     }
+
+    /**
+     * Updates the value of the node at the specified index.
+     * @param index - The zero-based index of the node to update.
+     * @param value - The new value to set.
+     * @returns True if the update was successful, false if the index is out of bounds.
+     */
+    set(index: number, value: number): boolean {
+        // Using the get method to retrieve the node at the specified index
+        const temp = this.get(index);
+
+        // If the node exists at the index, update its value
+        if (temp) {
+            temp.value = value;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
