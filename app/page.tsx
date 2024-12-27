@@ -1,4 +1,4 @@
-import LinkedList from "@/implementations/scott-barret";
+import LinkedList from "@/implementations/singly_linked_lists/scott-barret";
 
 export default function Home() {
     const myLinkedList = new LinkedList(4);
