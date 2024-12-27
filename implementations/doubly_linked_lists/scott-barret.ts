@@ -43,4 +43,31 @@ export default class DoublyLinkedList {
         this.length++;
         return this;
     }
+
+    pop(): Node | null {
+        // Edge Case - 1: Empty List
+        if (!this.head || !this.tail || this.length === 0) {
+            return null;
+        }
+
+        const temp = this.tail;
+
+        // Edge Case - 2: One Item
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            // Moving tail to the previous node
+            this.tail = temp.prev;
+
+            // Unlinking the last node from the list
+            this.tail!.next = null;
+
+            // Clearing the previous pointer of the last node
+            temp.prev = null;
+        }
+
+        this.length--;
+        return temp;
+    }
 }
