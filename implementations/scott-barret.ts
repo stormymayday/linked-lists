@@ -171,4 +171,37 @@ export default class LinkedList {
             return false;
         }
     }
+
+    /**
+     * Inserts a new node with the given value at the specified index.
+     * @param index - The zero-based index at which to insert the new node.
+     * @param value - The value of the new node.
+     * @returns True if the insertion was successful, false if the index is out of bounds.
+     */
+    insert(index: number, value: number): boolean {
+        // Checking if index is out of bounds
+        if (index < 0 || index > this.length) {
+            return false;
+        } else if (index === 0) {
+            // Inserting at the beginning of the list
+            this.unshift(value);
+            return true;
+        } else if (index === this.length) {
+            // Inserting at the end of the list
+            this.push(value);
+            return true;
+        } else {
+            // Inserting in the middle of the list
+            const pre = this.get(index - 1);
+            if (!pre) {
+                return false;
+            } else {
+                const newNode = new Node(value);
+                newNode.next = pre?.next;
+                pre.next = newNode;
+                this.length++;
+                return true;
+            }
+        }
+    }
 }
