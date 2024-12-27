@@ -204,4 +204,45 @@ export default class LinkedList {
             }
         }
     }
+
+    /**
+     * Removes the node at the specified index.
+     * @param index - The zero-based index of the node to remove.
+     * @returns The removed node, or null if the index is out of bounds.
+     */
+    remove(index: number): Node | null {
+        // Edge Case: Checking if index is out of bounds
+        if (index < 0 || index >= this.length) {
+            return null;
+        } else if (index === 0) {
+            // Removing the first node
+            return this.shift();
+        } else if (index === this.length - 1) {
+            // Removing the last node
+            return this.pop();
+        } else {
+            // Retrieving the node before the one to be removed
+            const pre = this.get(index - 1);
+
+            // Checking if the node before and the one to be removed exist
+            if (!pre || !pre.next) {
+                return null;
+            } else {
+                // Retrieving the node to be removed
+                const temp = pre.next;
+
+                // Moving before's pointer past temp
+                pre.next = temp?.next;
+
+                // Unlinking temp
+                temp.next = null;
+
+                // Decrementing the length
+                this.length--;
+
+                // Returning the removed node
+                return temp;
+            }
+        }
+    }
 }
