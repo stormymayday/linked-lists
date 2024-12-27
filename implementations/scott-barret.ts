@@ -245,4 +245,33 @@ export default class LinkedList {
             }
         }
     }
+
+    /**
+     * Reverses the linked list in place.
+     * @returns The reversed linked list.
+     */
+    reverse(): LinkedList {
+        if (this.length === 0) {
+            return this;
+        }
+
+        // Swapping head and tail
+        let temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+
+        // Initializing pointers for reversal
+        let before: Node | null = null;
+        let after: Node | null = null;
+
+        // Iterating through the list and reversing pointers
+        for (let i = 0; i < this.length; i++) {
+            after = temp!.next;
+            temp!.next = before;
+            before = temp;
+            temp = after;
+        }
+
+        return this;
+    }
 }
