@@ -72,14 +72,22 @@ export default class DoublyLinkedList {
     }
 
     unshift(value: number): DoublyLinkedList {
+        // Creating a new node with the given value
         const newNode = new Node(value);
 
+        // Edge Case: Checking if list is empty
         if (!this.head) {
+            // If empty, set both head and tail to new node
             this.head = newNode;
             this.tail = newNode;
         } else {
+            // Setting new node's next pointer pont to the head
             newNode.next = this.head;
+
+            // Pointing head's prev pointer to the new node
             this.head.prev = newNode;
+
+            // Pointing head to the new node
             this.head = newNode;
         }
 
