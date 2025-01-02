@@ -139,4 +139,17 @@ export default class DoublyLinkedList {
             return temp;
         }
     }
+
+    set(index: number, value: number): boolean {
+        // Using the get method to retrieve the node at the specified index
+        const node = this.get(index);
+
+        // If the node exists at the index, update its value
+        if (!node) {
+            return false;
+        } else {
+            node.value = value;
+            return true;
+        }
+    }
 }
