@@ -182,4 +182,36 @@ export default class DoublyLinkedList {
             }
         }
     }
+
+    remove(index: number): Node | null {
+        // Edge Case: Index out of bounds
+        if (index < 0 || index >= this.length) {
+            return null;
+        } else if (index === 0) {
+            // Removing the first node
+            return this.shift();
+        } else if (index === this.length - 1) {
+            // Removing the last node
+            return this.pop();
+        } else {
+            // Retrieving node at the index to be removed
+            const temp = this.get(index);
+
+            // Checking if the node exists and has adjacent nodes
+            if (!temp || !temp.next || !temp.prev) {
+                return null;
+            } else {
+                // Re-linking the adjacent nodes
+                temp.prev.next = temp.next;
+                temp.next.prev = temp.prev;
+
+                // Clearing the removed node's pointers
+                temp.next = null;
+                temp.prev = null;
+
+                this.length--;
+                return temp;
+            }
+        }
+    }
 }
