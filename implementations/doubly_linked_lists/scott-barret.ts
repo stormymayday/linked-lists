@@ -116,4 +116,27 @@ export default class DoublyLinkedList {
         this.length--;
         return temp;
     }
+
+    get(index: number): Node | null {
+        // Edge Case: Index is out of bounds
+        if (index < 0 || index >= this.length) {
+            return null;
+        } else {
+            let temp = null;
+            if (index < this.length / 2) {
+                // Starting from head if index is in the first half of the list
+                temp = this.head;
+                for (let i = 0; i < index; i++) {
+                    temp = temp!.next;
+                }
+            } else {
+                // Otherwise, starting from tail
+                temp = this.tail;
+                for (let i = this.length - 1; i > index; i--) {
+                    temp = temp!.prev;
+                }
+            }
+            return temp;
+        }
+    }
 }
