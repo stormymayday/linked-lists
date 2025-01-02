@@ -152,4 +152,34 @@ export default class DoublyLinkedList {
             return true;
         }
     }
+
+    insert(index: number, value: number): boolean {
+        // Checking if index is out of bounds
+        if (index < 0 || index > this.length) {
+            return false;
+        } else if (index === 0) {
+            // Inserting at the beginning of the list
+            this.unshift(value);
+            return true;
+        } else if (index === this.length) {
+            // Inserting at the end of the list
+            this.push(value);
+            return true;
+        } else {
+            const before = this.get(index - 1);
+            const after = before?.next;
+            if (!before || !after) {
+                return false;
+            } else {
+                // Inserting in the middle of the list
+                const newNode = new Node(value);
+                before.next = newNode;
+                newNode.prev = before;
+                newNode.next = after;
+                after.prev = newNode;
+                this.length++;
+                return true;
+            }
+        }
+    }
 }
