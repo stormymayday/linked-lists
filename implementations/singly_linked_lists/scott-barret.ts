@@ -104,7 +104,7 @@ export default class LinkedList {
     }
 
     shift(): Node | null {
-        // Edge Case 1: If list is empty, return undefined
+        // Edge Case 1: If list is empty
         if (!this.head) return null;
 
         // Storing the current head pointer

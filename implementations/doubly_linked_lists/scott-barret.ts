@@ -94,4 +94,26 @@ export default class DoublyLinkedList {
         this.length++;
         return this;
     }
+
+    shift(): Node | null {
+        // Edge Case 1: If list is empty
+        if (!this.head || this.length === 0) {
+            return null;
+        }
+        const temp = this.head;
+        // Edge Case 2: One Item
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            // Moving the head pointer to the next node
+            this.head = this.head.next;
+
+            // Disconnecting node from the list
+            this.head!.prev = null;
+            temp.next = null;
+        }
+        this.length--;
+        return temp;
+    }
 }
