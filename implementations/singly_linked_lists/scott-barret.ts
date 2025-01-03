@@ -298,4 +298,30 @@ export default class LinkedList {
         // 4. Return slow pointer (middle node found)
         return slow;
     }
+
+    /**
+     * Detects if there is a loop in the linked list using Floyd's cycle-finding algorithm.
+     * @returns {boolean} True if there is a loop, otherwise false.
+     */
+    hasLoop(): boolean {
+        let slow: Node | null = this.head;
+        let fast: Node | null = this.head;
+
+        // Traverse the list with two pointers
+        while (fast && fast.next) {
+            // Move slow pointer by one step if it exists
+            slow = slow ? slow.next : null;
+
+            // Move fast pointer by two steps
+            fast = fast.next.next;
+
+            // If the slow and fast pointers meet, there is a cycle
+            if (slow === fast) {
+                return true;
+            }
+        }
+
+        // If fast reaches the end (null), there is no cycle
+        return false;
+    }
 }
