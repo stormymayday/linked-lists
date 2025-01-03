@@ -324,4 +324,36 @@ export default class LinkedList {
         // If fast reaches the end (null), there is no cycle
         return false;
     }
+
+    /**
+     * Finds Kth node from the end
+     * @param k - Kth number from the end
+     * @returns {Node | null} Kth node from the end, or null
+     */
+    findKthFromEnd(k: number): Node | null {
+        // Validating the input (negative k is invalid)
+        if (k < 0) return null;
+
+        // Initializing left and right pointers at the head
+        let left: Node | null = this.head;
+        let right: Node | null = this.head;
+
+        // Shifting right pointer k steps ahead
+        for (let i = 0; i < k; i++) {
+            // If right reaches null, k is out of range
+            if (!right) {
+                return null;
+            }
+            right = right.next;
+        }
+
+        // Moving both pointers one step at a time until the right pointer reaches the end
+        while (right) {
+            left = left!.next;
+            right = right.next;
+        }
+
+        // When the right pointer reaches the end, the left pointer is at the Kth node from the end
+        return left;
+    }
 }
