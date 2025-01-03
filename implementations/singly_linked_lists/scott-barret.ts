@@ -356,4 +356,53 @@ export default class LinkedList {
         // When the right pointer reaches the end, the left pointer is at the Kth node from the end
         return left;
     }
+
+    /**
+     * Partitions the list around a value x, such that all nodes less than x come
+     * before all nodes greater than or equal to x. The original relative order
+     * of the nodes is preserved.
+     * @param x - The value to partition around
+     */
+    partitionList(x: number): void {
+        // If the list is empty, do nothing
+        if (!this.head) return;
+
+        // Creating dummy nodes for two sublists
+        // Dummy node for "less than x" list
+        const dummy1: Node | null = new Node(0);
+        // Dummy node for "greater or equal to x" list
+        const dummy2: Node | null = new Node(0);
+
+        // Initializing prev pointers for sublists
+        let ptr1 = dummy1;
+        let ptr2 = dummy2;
+
+        // Initializing current pointer at head to traverse the original list
+        let current: Node | null = this.head;
+
+        // Iterating through the list
+        while (current) {
+            // If current value is less than x
+            if (current.value < x) {
+                // Adding current node to the first sublist
+                ptr1.next = new Node(current.value);
+                ptr1 = ptr1.next;
+            } else {
+                // Otherwise, adding current node to the second sublist
+                ptr2.next = new Node(current.value);
+                ptr2 = ptr2.next;
+            }
+            // Moving current pointer to the next node
+            current = current.next;
+        }
+
+        // Connecting the sublists
+        ptr1.next = dummy2.next;
+
+        // Terminating the "greater" list
+        ptr2.next = null;
+
+        // Updating the head of the list
+        this.head = dummy1.next;
+    }
 }
