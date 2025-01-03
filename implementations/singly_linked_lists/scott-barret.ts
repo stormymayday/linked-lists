@@ -405,4 +405,52 @@ export default class LinkedList {
         // Updating the head of the list
         this.head = dummy1.next;
     }
+
+    /**
+     * Removes all duplicate values from the linked list, keeping only the first occurrence of each value.
+     * Uses a Set to track seen values, making it an O(n) time complexity operation.
+     *
+     * Example:
+     * Before: 1 -> 2 -> 2 -> 3 -> 1 -> 4
+     * After:  1 -> 2 -> 3 -> 4
+     *
+     * Time Complexity: O(n) where n is the number of nodes in the list
+     * Space Complexity: O(n) to store the Set of unique values
+     *
+     * @returns {void}
+     */
+    removeDuplicates(): void {
+        // If the list is empty, do nothing
+        if (!this.head) return;
+
+        // Creating a Set to track unique values
+        const uniqueValues: Set<number> = new Set();
+
+        // Initializing previous pointer as null
+        let prev: Node | null = null;
+
+        // Initializing current pointer at the head
+        let current: Node | null = this.head;
+
+        // Iterating through the list
+        while (current) {
+            // If value already exists in the set
+            if (uniqueValues.has(current.value)) {
+                // Remove the duplicate node by updating previous' next
+                prev!.next = current.next;
+
+                // Decrementing list length
+                this.length--;
+            } else {
+                // Otherwise, Adding new value to the Set
+                uniqueValues.add(current.value);
+
+                // Updating previous pointer to current node
+                prev = current;
+            }
+
+            // Moving current pointer to the next node
+            current = current.next;
+        }
+    }
 }
