@@ -274,4 +274,28 @@ export default class LinkedList {
 
         return this;
     }
+
+    /**
+     * Finds the middle node of the list.
+     * @returns {Node | null} The middle node or null if list is empty.
+     */
+    findMiddleNode(): Node | null {
+        // 1. Initialize slow pointer to the head of the list
+        let slow: Node | null = this.head;
+
+        // 2. Initialize fast pointer to the head of the list
+        let fast: Node | null = this.head;
+
+        // 3. Loop while fast pointer is not null and fast pointer's next node is not null
+        while (fast !== null && fast.next !== null) {
+            // a. Move slow pointer one step ahead in the list
+            slow = slow!.next;
+
+            // b. Move fast pointer two steps ahead in the list
+            fast = fast.next.next;
+        }
+
+        // 4. Return slow pointer (middle node found)
+        return slow;
+    }
 }
