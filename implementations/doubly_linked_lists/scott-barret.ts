@@ -254,4 +254,27 @@ export default class DoublyLinkedList {
         this.head = this.tail;
         this.tail = temp;
     }
+
+    isPalindrome(): boolean {
+        // If the list has 0 or 1 nodes, it's a palindrome
+        if (this.length <= 1) return true;
+
+        // Initializing forwardNode at the head and backwardNode at the tail
+        let forwardNode = this.head;
+        let backwardNode = this.tail;
+
+        // Iterate through half of the list
+        for (let i = 0; i < Math.floor(this.length / 2); i++) {
+            // If forwardNode value is not equal to backwardNode value,
+            // it's not a palindrome
+            if (forwardNode!.value !== backwardNode!.value) return false;
+
+            // Move forwardNode to the next node and backwardNode to the previous node
+            forwardNode = forwardNode!.next;
+            backwardNode = backwardNode!.prev;
+        }
+
+        // If all pairs match, it's a palindrome
+        return true;
+    }
 }
