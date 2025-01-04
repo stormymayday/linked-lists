@@ -214,4 +214,12 @@ export default class DoublyLinkedList {
             }
         }
     }
+
+    swapFirstLast() {
+        if (!this.head || !this.tail) return;
+
+        const temp = this.head.value;
+        this.head.value = this.tail.value;
+        this.tail.value = temp;
+    }
 }
