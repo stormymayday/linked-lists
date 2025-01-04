@@ -222,4 +222,36 @@ export default class DoublyLinkedList {
         this.head.value = this.tail.value;
         this.tail.value = temp;
     }
+
+    reverse() {
+        if (!this.head || !this.tail) return;
+
+        // Starting at the first node
+        let current: Node | null = this.head;
+
+        // Creating a 'temp' variable set to null.
+        // Used to temporarily store data.
+        let temp = null;
+
+        // Continue as long as 'current' is not null.
+        while (current) {
+            // Storing address of the previous node in temp
+            temp = current.prev;
+
+            // Pointing previous pointer to the next node
+            current.prev = current.next;
+
+            // Pointing next pointer to the previous node (stored in temp)
+            current.next = temp;
+
+            // Moving current pointer forward
+            // ('prev' now holds the original 'next')
+            current = current.prev;
+        }
+
+        // Switching 'head' and 'tail'.
+        temp = this.head;
+        this.head = this.tail;
+        this.tail = temp;
+    }
 }
