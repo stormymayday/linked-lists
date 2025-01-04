@@ -89,7 +89,6 @@ export default class LinkedList {
             }
             this.tail = before;
             this.tail.next = null;
-            temp.next = null;
             this.length--;
             if (this.length === 0) {
                 this.head = null;
